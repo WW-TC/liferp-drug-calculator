@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,7 @@ namespace LifeRP_DrugCalc
         {
             Console.Title= "Life RP Drug Calculator";
 
-            Console.WriteLine("============================== LIFE RP Drug Calculator ==============================" + "\n" + "(c) WWTC - v1.1" + "\n");
+            Console.WriteLine("============================== LIFE RP Drug Calculator ==============================" + "\n" + "(c) WWTC - v1.2" + "\n");
             Console.Write("What type of drugs are you making (Weed, Crystal or Snow) : ");
             string DrugType = Console.ReadLine();
 
@@ -84,10 +84,10 @@ namespace LifeRP_DrugCalc
                 int Chemicals = TrayAmountN * 3;
                 Console.WriteLine("- Chemicals : " + Chemicals + " (" + Chemicals * 127 + "$)");
 
-                int Cloth = TrayAmountN * 12;
-                Console.WriteLine("- Cloth : " + Cloth + " (" + Cloth * 5.5f + "$)");
+                int Cloth = TrayAmountN * 3;
+                Console.WriteLine("- Fertilizers : " + Cloth + " (" + Cloth * 30f + "$)");
 
-                float TotalExpenses = Chemicals * 127 + Cloth * 5.5f;
+                float TotalExpenses = Chemicals * 127 + Cloth * 30f;
                 Console.WriteLine("- USD : " + TotalExpenses + "$");
 
                 int TotalGains = (TrayAmountN * 5) * 280;
@@ -120,7 +120,7 @@ namespace LifeRP_DrugCalc
                 string BudgetS = Console.ReadLine();
                 int BudgetN = Convert.ToInt32(BudgetS);
 
-                float TraysF = BudgetN / (381f + 66f);
+                float TraysF = BudgetN / (381f + 90f);
                 int TraysI = ((int)TraysF);
 
                 if (TraysI <= 0)
@@ -134,12 +134,12 @@ namespace LifeRP_DrugCalc
                     Console.WriteLine("\n" + "You will need the following materials : ");
 
                     int Chemicals = TraysI * 3;
-                    int Cloth = TraysI * 12;
+                    int Cloth = TraysI * 3;
 
                     Console.WriteLine("- Chemicals : " + Chemicals + " (" + Chemicals * 127 + "$)");
-                    Console.WriteLine("- Cloth : " + Cloth + " (" + Cloth * 5.5f + "$)");
+                    Console.WriteLine("- Fertilizers : " + Cloth + " (" + Cloth * 30f + "$)");
 
-                    int TotalExpenses = Chemicals * 127 + (Cloth / 2) * 11;
+                    int TotalExpenses = Chemicals * 127 + Cloth * 30;
                     int TotalGains = (TraysI * 5) * 280;
                     int Profits = TotalGains - TotalExpenses;
 
@@ -169,26 +169,26 @@ namespace LifeRP_DrugCalc
 
             if (Mode == "Profits")
             {
-                Console.Write("\n" + "How much do you want to make (minimum : 953$) : ");
+                Console.Write("\n" + "How much do you want to make (minimum : 929$) : ");
                 string ProfitsS = Console.ReadLine();
                 int ProfitsN = Convert.ToInt32(ProfitsS);
 
-                if(ProfitsN < 953)
+                if(ProfitsN < 929)
                 {
                     Console.WriteLine("\n" + "Profits aren't high enough to make at least 1 tray");
                     Crystal();
                 }
                 else
                 {
-                    float TraysF = ProfitsN / 953f;
+                    float TraysF = ProfitsN / 929f;
                     int TraysI = ((int)TraysF);
 
                     int Chemicals = TraysI * 3;
-                    int Cloth = TraysI * 12;
-                    float TotalExpenses = Chemicals * 127 + Cloth * 5.5f;
+                    int Cloth = TraysI * 3;
+                    float TotalExpenses = Chemicals * 127 + Cloth * 30f;
                     Console.WriteLine("\n" + "To make " + ProfitsN + "$, you will need to make " + TraysI + " tray(s) costing you " + TotalExpenses + "$");
 
-                    Console.WriteLine("\n" + "You will need the following materials :" + "\n" + "- Chemicals : " + Chemicals + " (" + Chemicals * 127 + "$)" + "\n" + "- Cloth : " + Cloth + " (" + Cloth * 5.5f + "$)");
+                    Console.WriteLine("\n" + "You will need the following materials :" + "\n" + "- Chemicals : " + Chemicals + " (" + Chemicals * 127 + "$)" + "\n" + "- Fertilizers : " + Cloth + " (" + Cloth * 30f + "$)");
 
                     float EProfits = ((TraysI * 5) * 280) - TotalExpenses;
 
