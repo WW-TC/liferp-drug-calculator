@@ -3,6 +3,11 @@ The calculator will ask you what type of drug you are creating, and it will give
 
 # Currently supporting :
 - Weed
+
 - Crystal (using Tray Amount)
 - Crystal (using Profits)
 - Crystal (using Budget)
+
+- Snow (using Batch Amount)
+- Snow (using Profits)
+- Snow (using Budget)

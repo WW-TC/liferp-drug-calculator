@@ -10,23 +10,23 @@ namespace LifeRP_DrugCalc
     {
         static void Main()
         {
-            Console.Title= "Life RP Drug Calculator";
+            Console.Title = "Life RP Drug Calculator";
 
-            Console.WriteLine("============================== LIFE RP Drug Calculator ==============================" + "\n" + "(c) WWTC - v1.2" + "\n");
+            Console.WriteLine("============================== LIFE RP Drug Calculator ==============================" + "\n" + "(c) WWTC - v1.3" + "\n");
             Console.Write("What type of drugs are you making (Weed, Crystal or Snow) : ");
             string DrugType = Console.ReadLine();
 
-            if (DrugType == "Weed")
+            if (DrugType.ToUpper() == "WEED")
             {
                 Weed();
             }
 
-            if (DrugType == "Crystal")
+            if (DrugType.ToUpper() == "CRYSTAL")
             {
                 Crystal();
             }
 
-            if (DrugType == "Snow")
+            if (DrugType.ToUpper() == "SNOW")
             {
                 Snow();
             }
@@ -71,9 +71,9 @@ namespace LifeRP_DrugCalc
         static void Crystal()
         {
             Console.Write("\n" + "What mode do you want to use (Budget, Trays or Profits) : ");
-            string Mode = Console.ReadLine();
+            string modeCrystal = Console.ReadLine();
 
-            if(Mode == "Trays")
+            if (modeCrystal.ToUpper() == "TRAYS")
             {
                 Console.Write("\n" + "How many tray(s) of Crystal do you want to produce : ");
                 string TrayAmountS = Console.ReadLine();
@@ -114,7 +114,7 @@ namespace LifeRP_DrugCalc
                 }
             }
 
-            if (Mode == "Budget")
+            if (modeCrystal.ToUpper() == "BUDGET")
             {
                 Console.Write("\n" + "What is your budget : ");
                 string BudgetS = Console.ReadLine();
@@ -137,7 +137,7 @@ namespace LifeRP_DrugCalc
                     int Cloth = TraysI * 3;
 
                     Console.WriteLine("- Chemicals : " + Chemicals + " (" + Chemicals * 127 + "$)");
-                    Console.WriteLine("- Fertilizers : " + Cloth + " (" + Cloth * 30f + "$)");
+                    Console.WriteLine("- Cloth (Fertilizer) : " + Cloth + " (" + Cloth * 30f + "$)");
 
                     int TotalExpenses = Chemicals * 127 + Cloth * 30;
                     int TotalGains = (TraysI * 5) * 280;
@@ -167,13 +167,13 @@ namespace LifeRP_DrugCalc
 
             }
 
-            if (Mode == "Profits")
+            if (modeCrystal.ToUpper() == "PROFITS")
             {
                 Console.Write("\n" + "How much do you want to make (minimum : 929$) : ");
                 string ProfitsS = Console.ReadLine();
                 int ProfitsN = Convert.ToInt32(ProfitsS);
 
-                if(ProfitsN < 929)
+                if (ProfitsN < 929)
                 {
                     Console.WriteLine("\n" + "Profits aren't high enough to make at least 1 tray");
                     Crystal();
@@ -222,8 +222,143 @@ namespace LifeRP_DrugCalc
 
         static void Snow()
         {
-            Console.WriteLine("This drug type is currently un-supported" + "\n");
-            Main();
+            Console.WriteLine("\n" + "What mode do you want to use (Budget, Batches or Profits) : ");
+            string modeSnow = Console.ReadLine();
+
+            //Snow Budget
+            if (modeSnow.ToUpper() == "BUDGET")
+            {
+                Console.WriteLine("\n" + "Enter your budget : ");
+                string BudgetS = Console.ReadLine();
+                int BudgetN = Convert.ToInt32(BudgetS);
+
+                float BagsF = BudgetN / 88f;
+                int BagsI = ((int)BagsF);
+
+                if (BagsI <= 3)
+                {
+                    Console.WriteLine("\n" + "Your budget is too low to produce any snow");
+                    Snow();
+                }
+                else
+                {
+                    Console.WriteLine("\n" + "With a budget of " + BudgetN + "$, you can produce " + BagsI + " bags(s)");
+                    Console.WriteLine("\n" + "You will need the following materials : ");
+
+                    int Cloth = BagsI * 4;
+
+                    Console.WriteLine("- Cloth (Fertilizer) : " + Cloth + " (" + Cloth * 22 + "$)");
+
+                    int TotalExpenses = Cloth * 22;
+                    int TotalGains = (BagsI) * 205;
+                    int Profits = TotalGains - TotalExpenses;
+
+                    float WallLocker = 198f;
+                    float WallLockerAmount = BagsI / WallLocker;
+                    Console.WriteLine("\n" + "You will make a total of " + Profits + " $, and need " + WallLockerAmount.ToString("0.00") + " wall lockers to carry all " + BagsI + " snow bags");
+
+                    //End
+                    Console.ReadKey();
+                    Console.Write("\n" + "Do you want to restart or go back to main menu (Back or *type anything*) : ");
+                    string MenuChoice = Console.ReadLine();
+
+                    if (MenuChoice == "Back")
+                    {
+                        Main();
+                    }
+                    else
+                    {
+                        Snow();
+                    }
+                }
+
+            }
+
+            //Snow Profits
+            if (modeSnow.ToUpper() == "PROFITS")
+            {
+                Console.Write("\n" + "How much do you want to make (minimum : 820$) : ");
+                string ProfitsS = Console.ReadLine();
+                int ProfitsN = Convert.ToInt32(ProfitsS);
+
+                if (ProfitsN < 820)
+                {
+                    Console.WriteLine("\n" + "Profits aren't high enough to make at least 1 tray");
+                    Snow();
+                }
+                else
+                {
+                    float batchF = ProfitsN / 820f;
+                    int batchI = ((int)batchF);
+
+                    int bagsI = batchI * 4;
+                    int Cloth = bagsI * 4;
+                    float TotalExpenses = Cloth * 22f;
+
+                    Console.WriteLine("\n" + "You will need the following materials :" + "\n" + "- Cloth (Fertilizer) : " + Cloth + " (" + Cloth * 22 + "$)");
+
+                    float Profits = (bagsI * 205) - TotalExpenses;
+
+                    float WallLocker = 198f;
+                    float WallLockerAmount = bagsI / WallLocker;
+                    Console.WriteLine("\n" + "This will make you exactly " + Profits + "$ and will need " + WallLockerAmount.ToString("0.00") + " wall lockers to carry all " + bagsI + " snow bags");
+
+                    //End
+                    Console.ReadKey();
+                    Console.Write("\n" + "Do you want to restart or go back to main menu (Back or *type anything*) : ");
+                    string MenuChoice = Console.ReadLine();
+
+                    if (MenuChoice == "Back")
+                    {
+                        Main();
+                    }
+                    else
+                    {
+                        Snow();
+                    }
+                }
+            }
+
+            //Snow Batches
+            if (modeSnow.ToUpper() == "BATCHES")
+            {
+                Console.Write("\n" + "How many batches do you want to make (1 Batch = 4 Bags) : ");
+                string batchS = Console.ReadLine();
+                int batchI = Convert.ToInt32(batchS);
+
+                int bagsI = batchI * 4;
+                int cloth = bagsI * 4;
+
+                float cost = cloth * 22f;
+
+                Console.WriteLine("\n" + "You will need the following materials :" + "\n" + "- Cloth (Fertilizer) : " + cloth + " (" + cost + "$)");
+
+                float Profits = (bagsI * 205) - cost;
+
+                float WallLocker = 198f;
+                float WallLockerAmount = bagsI / WallLocker;
+                Console.WriteLine("\n" + "This will make you exactly " + Profits + "$ and will need " + WallLockerAmount.ToString("0.00") + " wall lockers to carry all " + bagsI + " snow bags");
+
+                //End
+                Console.ReadKey();
+                Console.Write("\n" + "Do you want to restart or go back to main menu (Back or *type anything*) : ");
+                string MenuChoice = Console.ReadLine();
+
+                if (MenuChoice == "Back")
+                {
+                    Main();
+                }
+                else
+                {
+                    Snow();
+                }
+            }
+
+            else
+            {
+                    Console.WriteLine("Invalid Mode");
+                    Snow();
+            }
         }
     }
 }
