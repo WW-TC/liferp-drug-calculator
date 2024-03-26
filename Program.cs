@@ -1,364 +1,575 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LifeRP_DrugCalc
 {
     class Program
     {
+
         static void Main()
         {
-            Console.Title = "Life RP Drug Calculator";
+            Console.Title = "Life RP Drug Calculator - v2";
+            Console.WriteLine($"============================== LIFE RP Drug Calculator ==============================");
+            DrugMenu();
+        }
+        static void DrugMenu()
+        {
 
-            Console.WriteLine("============================== LIFE RP Drug Calculator ==============================" + "\n" + "(c) WWTC - v1.3" + "\n");
-            Console.Write("What type of drugs are you making (Weed, Crystal or Snow) : ");
-            string DrugType = Console.ReadLine();
+            Console.Write($"\nWhat type of drugs are you making (Weed, Crystal or Snow) : ");
+            string drugType = Console.ReadLine();
 
-            if (DrugType.ToUpper() == "WEED")
+            switch (drugType.ToLower())
             {
-                Weed();
-            }
-
-            if (DrugType.ToUpper() == "CRYSTAL")
-            {
-                Crystal();
-            }
-
-            if (DrugType.ToUpper() == "SNOW")
-            {
-                Snow();
-            }
-
-            else
-            {
-                Console.WriteLine("Invalid Option - Restarting Calculator");
-                Main();
+                case "weed":
+                    Weed_Selector();
+                    break;
+                case "crystal":
+                    Crystal_Selector();
+                    break;
+                case "snow":
+                    Snow_Selector();
+                    break;
+                default:
+                    Console.WriteLine("\n" + "Invalid Drug Type, try again." + "\n");
+                    DrugMenu();
+                    break;
             }
 
         }
 
-        static void Weed()
+        // Weed Selector
+        static void Weed_Selector()
         {
-            Console.Write("\n" + "How many joints do you want to make : ");
-            string JointsS = Console.ReadLine();
-            int JointsN = Convert.ToInt32(JointsS);
+            Console.Write("\n" + "Enter calculator type (Budget, Joint, Profit) : ");
+            string weedType = Console.ReadLine();
 
-            int Cloth = JointsN * 8;
-            Console.WriteLine("\n" + "To make " + JointsN + " joints, you will need " + Cloth + " cloth (" + Cloth * 5.5f + "$)");
-            float Profits = JointsN * 125 - (Cloth * 5.5f);
+            switch (weedType.ToLower())
+            {
+                case "budget":
+                    Weed_Budget();
+                    break;
+                case "joint":
+                    Weed_Joint();
+                    break;
+                case "profit":
+                    Weed_Profit();
+                    break;
+                default:
+                    Console.WriteLine("\n" + "Invalid Calculator Type, try again");
+                    Weed_Selector();
+                    break;
+            }
+        }
 
-            float WallLocker = 198f;
-            float WallLockerAmount = JointsN / WallLocker;
-            Console.WriteLine("\n" + "You will make " + Profits + "$, you will need " + WallLockerAmount.ToString("0.00") + " wall lockers for transportation");
+        // Crystal Selector
+        static void Crystal_Selector()
+        {
+            Console.Write("\n" + "Enter calculator type (Budget, Tray, Bag, Profit) : ");
+            string crystalType = Console.ReadLine();
 
-            //End
+            switch (crystalType.ToLower())
+            {
+                case "budget":
+                    Crystal_Budget();
+                    break;
+                case "tray":
+                    Crystal_Tray();
+                    break;
+                case "profit":
+                    Crystal_Profit();
+                    break;
+                case "bag":
+                    Crystal_Bag();
+                    break;
+                default:
+                    Console.WriteLine("\n" + "Invalid Calculator Type, try again");
+                    Crystal_Selector();
+                    break;
+            }
+        }
+
+        // Snow Selector
+        static void Snow_Selector()
+        {
+            Console.Write("\n" + "Enter calculator type (Budget, Batch, Bag, Profit) : ");
+            string weedType = Console.ReadLine();
+
+            switch (weedType.ToLower())
+            {
+                case "budget":
+                    Snow_Budget();
+                    break;
+                case "batch":
+                    Snow_Batch();
+                    break;
+                case "profit":
+                    Snow_Profit();
+                    break;
+                case "bag":
+                    Snow_Bag();
+                    break;
+                default:
+                    Console.WriteLine("\n" + "Invalid Calculator Type, try again");
+                    Snow_Selector();
+                    break;
+            }
+        }
+
+        //Weed Budget v2
+        static void Weed_Budget()
+        {
+            Console.Write($"\nEnter your budget (minimum of 44$) : ");
+            string budgetS = Console.ReadLine();
+
+            bool success = int.TryParse(budgetS, out int budget);
+
+            if (success && budget >= 44)
+            {
+                float jointsF = budget / 44f;
+                int joints = (int)jointsF;
+
+                //Material List
+                int clothJoint = joints * 4;
+                int clothFertilizer = joints * 4;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n- Cloth (Joint) : {clothJoint} [{clothJoint * 5.5f}$]\n-Cloth (Fertilizers) : {clothFertilizer} ({clothFertilizer / 4}) [{clothFertilizer * 5.5f}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {joints * 125}$\n-Production Costs : {clothJoint * 2 * 5.5f}$\n=========================\n-Net Profits : {joints * 81}$");
+                Console.WriteLine($"\n-Joints Produced : {joints}\n===========================================");
+
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Weed_Budget();
+            }
+
+            //End Menu
             Console.ReadKey();
-            Console.Write("\n" + "Do you want to restart or go back to main menu (Back or *type anything*) : ");
-            string MenuChoice = Console.ReadLine();
+            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
 
-            if (MenuChoice == "Back")
+            if (endMenu.ToLower() == "back")
             {
-                Main();
+                DrugMenu();
             }
             else
             {
-                Weed();
+                Weed_Selector();
             }
         }
 
-        static void Crystal()
+        //Weed Joint v2
+        static void Weed_Joint()
         {
-            Console.Write("\n" + "What mode do you want to use (Budget, Trays or Profits) : ");
-            string modeCrystal = Console.ReadLine();
+            Console.Write($"\nHow many joints do you want to make : ");
+            string jointsS = Console.ReadLine();
 
-            if (modeCrystal.ToUpper() == "TRAYS")
+            bool success = int.TryParse(jointsS, out int joints);
+
+            if (success && joints >= 1)
             {
-                Console.Write("\n" + "How many tray(s) of Crystal do you want to produce : ");
-                string TrayAmountS = Console.ReadLine();
-                int TrayAmountN = Convert.ToInt32(TrayAmountS);
+                //Material List
+                int clothJoint = joints * 4;
+                int clothFertilizer = joints * 4;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n- Cloth (Joint) : {clothJoint} [{clothJoint * 5.5f}$]\n-Cloth (Fertilizers) : {clothFertilizer} ({clothFertilizer / 4}) [{clothFertilizer * 5.5f}$]");
 
-                Console.WriteLine("\n" + "To produce " + TrayAmountN + " crystal trays you will need :");
-
-                int Chemicals = TrayAmountN * 3;
-                Console.WriteLine("- Chemicals : " + Chemicals + " (" + Chemicals * 127 + "$)");
-
-                int Cloth = TrayAmountN * 3;
-                Console.WriteLine("- Fertilizers : " + Cloth + " (" + Cloth * 30f + "$)");
-
-                float TotalExpenses = Chemicals * 127 + Cloth * 30f;
-                Console.WriteLine("- USD : " + TotalExpenses + "$");
-
-                int TotalGains = (TrayAmountN * 5) * 280;
-                float Profits = TotalGains - TotalExpenses;
-                Console.WriteLine("\n" + "Total Profits : " + Profits + "$");
-
-                float WallLocker = 198f;
-                int BagAmount = TrayAmountN * 5;
-                float WallLockerAmount = BagAmount / WallLocker;
-                Console.WriteLine("\n" + "This will produce " + BagAmount + " crystal bags, you will need " + WallLockerAmount.ToString("0.00") + " wall lockers for transportation");
-
-                //End
-                Console.ReadKey();
-                Console.Write("\n" + "Do you want to restart or go back to main menu (Back or *type anything*) : ");
-                string MenuChoice = Console.ReadLine();
-
-                if (MenuChoice == "Back")
-                {
-                    Main();
-                }
-                else
-                {
-                    Crystal();
-                }
-            }
-
-            if (modeCrystal.ToUpper() == "BUDGET")
-            {
-                Console.Write("\n" + "What is your budget : ");
-                string BudgetS = Console.ReadLine();
-                int BudgetN = Convert.ToInt32(BudgetS);
-
-                float TraysF = BudgetN / (381f + 90f);
-                int TraysI = ((int)TraysF);
-
-                if (TraysI <= 0)
-                {
-                    Console.WriteLine("\n" + "Your budget is too low to produce any meth");
-                    Crystal();
-                }
-                else
-                {
-                    Console.WriteLine("\n" + "With a budget of " + BudgetN + "$, you can produce " + TraysI + " tray(s)");
-                    Console.WriteLine("\n" + "You will need the following materials : ");
-
-                    int Chemicals = TraysI * 3;
-                    int Cloth = TraysI * 3;
-
-                    Console.WriteLine("- Chemicals : " + Chemicals + " (" + Chemicals * 127 + "$)");
-                    Console.WriteLine("- Cloth (Fertilizer) : " + Cloth + " (" + Cloth * 30f + "$)");
-
-                    int TotalExpenses = Chemicals * 127 + Cloth * 30;
-                    int TotalGains = (TraysI * 5) * 280;
-                    int Profits = TotalGains - TotalExpenses;
-
-                    Console.WriteLine("- USD : " + TotalExpenses + "$");
-
-                    float WallLocker = 198f;
-                    int Bags = TraysI * 5;
-                    float WallLockerAmount = Bags / WallLocker;
-                    Console.WriteLine("\n" + "You will make a total of " + Profits + " $, and need " + WallLockerAmount.ToString("0.00") + " wall lockers to carry all " + Bags + " crystal bags");
-
-                    //End
-                    Console.ReadKey();
-                    Console.Write("\n" + "Do you want to restart or go back to main menu (Back or *type anything*) : ");
-                    string MenuChoice = Console.ReadLine();
-
-                    if (MenuChoice == "Back")
-                    {
-                        Main();
-                    }
-                    else
-                    {
-                        Crystal();
-                    }
-                }
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {joints * 125}$\n-Production Costs : {clothJoint * 2 * 5.5f}$\n=========================\n-Net Profits : {joints * 81}$");
+                Console.WriteLine($"\n-Joints Produced : {joints}\n===========================================");
 
             }
-
-            if (modeCrystal.ToUpper() == "PROFITS")
-            {
-                Console.Write("\n" + "How much do you want to make (minimum : 929$) : ");
-                string ProfitsS = Console.ReadLine();
-                int ProfitsN = Convert.ToInt32(ProfitsS);
-
-                if (ProfitsN < 929)
-                {
-                    Console.WriteLine("\n" + "Profits aren't high enough to make at least 1 tray");
-                    Crystal();
-                }
-                else
-                {
-                    float TraysF = ProfitsN / 929f;
-                    int TraysI = ((int)TraysF);
-
-                    int Chemicals = TraysI * 3;
-                    int Cloth = TraysI * 3;
-                    float TotalExpenses = Chemicals * 127 + Cloth * 30f;
-                    Console.WriteLine("\n" + "To make " + ProfitsN + "$, you will need to make " + TraysI + " tray(s) costing you " + TotalExpenses + "$");
-
-                    Console.WriteLine("\n" + "You will need the following materials :" + "\n" + "- Chemicals : " + Chemicals + " (" + Chemicals * 127 + "$)" + "\n" + "- Fertilizers : " + Cloth + " (" + Cloth * 30f + "$)");
-
-                    float EProfits = ((TraysI * 5) * 280) - TotalExpenses;
-
-                    float WallLocker = 198f;
-                    int Bags = TraysI * 5;
-                    float WallLockerAmount = Bags / WallLocker;
-                    Console.WriteLine("\n" + "This will make you exactly " + EProfits + "$ and will need " + WallLockerAmount.ToString("0.00") + " wall lockers to carry all " + Bags + " crystal bags");
-
-                    //End
-                    Console.ReadKey();
-                    Console.Write("\n" + "Do you want to restart or go back to main menu (Back or *type anything*) : ");
-                    string MenuChoice = Console.ReadLine();
-
-                    if (MenuChoice == "Back")
-                    {
-                        Main();
-                    }
-                    else
-                    {
-                        Crystal();
-                    }
-                }
-            }
-
             else
             {
-                Console.WriteLine("Invalid Mode");
-                Crystal();
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Weed_Joint();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                DrugMenu();
+            }
+            else
+            {
+                Weed_Selector();
             }
         }
 
-        static void Snow()
+        // Weed Profit v2
+        static void Weed_Profit()
         {
-            Console.WriteLine("\n" + "What mode do you want to use (Budget, Batches or Profits) : ");
-            string modeSnow = Console.ReadLine();
+            Console.Write($"How much profits do you want to make (minimum of 81$) : ");
+            string profitS = Console.ReadLine();
 
-            //Snow Budget
-            if (modeSnow.ToUpper() == "BUDGET")
+            bool success = int.TryParse(profitS, out int profit);
+
+            if (success && profit >= 81)
             {
-                Console.WriteLine("\n" + "Enter your budget : ");
-                string BudgetS = Console.ReadLine();
-                int BudgetN = Convert.ToInt32(BudgetS);
+                float jointsF = profit / 81f;
+                int joints = (int)jointsF;
 
-                float BagsF = BudgetN / 88f;
-                int BagsI = ((int)BagsF);
+                //Material List
+                int clothJoint = joints * 4;
+                int clothFertilizer = joints * 4;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n- Cloth (Joint) : {clothJoint} [{clothJoint * 5.5f}$]\n-Cloth (Fertilizers) : {clothFertilizer} ({clothFertilizer/4}) [{clothFertilizer * 5.5f}$]");
 
-                if (BagsI <= 3)
-                {
-                    Console.WriteLine("\n" + "Your budget is too low to produce any snow");
-                    Snow();
-                }
-                else
-                {
-                    Console.WriteLine("\n" + "With a budget of " + BudgetN + "$, you can produce " + BagsI + " bags(s)");
-                    Console.WriteLine("\n" + "You will need the following materials : ");
-
-                    int Cloth = BagsI * 4;
-
-                    Console.WriteLine("- Cloth (Fertilizer) : " + Cloth + " (" + Cloth * 22 + "$)");
-
-                    int TotalExpenses = Cloth * 22;
-                    int TotalGains = (BagsI) * 205;
-                    int Profits = TotalGains - TotalExpenses;
-
-                    float WallLocker = 198f;
-                    float WallLockerAmount = BagsI / WallLocker;
-                    Console.WriteLine("\n" + "You will make a total of " + Profits + " $, and need " + WallLockerAmount.ToString("0.00") + " wall lockers to carry all " + BagsI + " snow bags");
-
-                    //End
-                    Console.ReadKey();
-                    Console.Write("\n" + "Do you want to restart or go back to main menu (Back or *type anything*) : ");
-                    string MenuChoice = Console.ReadLine();
-
-                    if (MenuChoice == "Back")
-                    {
-                        Main();
-                    }
-                    else
-                    {
-                        Snow();
-                    }
-                }
-
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {joints * 125}$\n-Production Costs : {clothJoint * 2 * 5.5f}$\n=========================\n-Net Profits : {joints * 81}$");
+                Console.WriteLine($"\n-Joints Produced : {joints}\n===========================================");
             }
-
-            //Snow Profits
-            if (modeSnow.ToUpper() == "PROFITS")
-            {
-                Console.Write("\n" + "How much do you want to make (minimum : 820$) : ");
-                string ProfitsS = Console.ReadLine();
-                int ProfitsN = Convert.ToInt32(ProfitsS);
-
-                if (ProfitsN < 820)
-                {
-                    Console.WriteLine("\n" + "Profits aren't high enough to make at least 1 tray");
-                    Snow();
-                }
-                else
-                {
-                    float batchF = ProfitsN / 820f;
-                    int batchI = ((int)batchF);
-
-                    int bagsI = batchI * 4;
-                    int Cloth = bagsI * 4;
-                    float TotalExpenses = Cloth * 22f;
-
-                    Console.WriteLine("\n" + "You will need the following materials :" + "\n" + "- Cloth (Fertilizer) : " + Cloth + " (" + Cloth * 22 + "$)");
-
-                    float Profits = (bagsI * 205) - TotalExpenses;
-
-                    float WallLocker = 198f;
-                    float WallLockerAmount = bagsI / WallLocker;
-                    Console.WriteLine("\n" + "This will make you exactly " + Profits + "$ and will need " + WallLockerAmount.ToString("0.00") + " wall lockers to carry all " + bagsI + " snow bags");
-
-                    //End
-                    Console.ReadKey();
-                    Console.Write("\n" + "Do you want to restart or go back to main menu (Back or *type anything*) : ");
-                    string MenuChoice = Console.ReadLine();
-
-                    if (MenuChoice == "Back")
-                    {
-                        Main();
-                    }
-                    else
-                    {
-                        Snow();
-                    }
-                }
-            }
-
-            //Snow Batches
-            if (modeSnow.ToUpper() == "BATCHES")
-            {
-                Console.Write("\n" + "How many batches do you want to make (1 Batch = 4 Bags) : ");
-                string batchS = Console.ReadLine();
-                int batchI = Convert.ToInt32(batchS);
-
-                int bagsI = batchI * 4;
-                int cloth = bagsI * 4;
-
-                float cost = cloth * 22f;
-
-                Console.WriteLine("\n" + "You will need the following materials :" + "\n" + "- Cloth (Fertilizer) : " + cloth + " (" + cost + "$)");
-
-                float Profits = (bagsI * 205) - cost;
-
-                float WallLocker = 198f;
-                float WallLockerAmount = bagsI / WallLocker;
-                Console.WriteLine("\n" + "This will make you exactly " + Profits + "$ and will need " + WallLockerAmount.ToString("0.00") + " wall lockers to carry all " + bagsI + " snow bags");
-
-                //End
-                Console.ReadKey();
-                Console.Write("\n" + "Do you want to restart or go back to main menu (Back or *type anything*) : ");
-                string MenuChoice = Console.ReadLine();
-
-                if (MenuChoice == "Back")
-                {
-                    Main();
-                }
-                else
-                {
-                    Snow();
-                }
-            }
-
             else
             {
-                    Console.WriteLine("Invalid Mode");
-                    Snow();
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Weed_Profit();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                DrugMenu();
+            }
+            else
+            {
+                Weed_Selector();
+            }
+        }
+
+        //Crystal Budget v2
+        static void Crystal_Budget()
+        {
+            Console.Write($"\nEnter your budget (minimum of 447$) : ");
+            string budgetS = Console.ReadLine();
+
+            bool success = int.TryParse(budgetS, out int budget);
+            if (success && budget >= 447)
+            {
+                float traysF = budget / 447f;
+                int trays = (int)traysF;
+
+                //Material List
+                int cloth = trays * 12;
+                int chemical = trays * 3;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth (Fertilizers) : {cloth} ({cloth / 4}) [{cloth * 5.5f}$]\n-Chemicals : {chemical} [{chemical * 127}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {trays * 1400}$\n-Production Costs : {cloth * 5.5f + chemical * 127}$\n=========================\n-Net Profits : {trays * 953}$");
+                Console.WriteLine($"\n-Crystal Bags Produced : {trays * 5}\n-Trays Produced : {trays}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Crystal_Budget();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                DrugMenu();
+            }
+            else
+            {
+                Crystal_Selector();
+            }
+        }
+
+        //Crystal Tray v2
+        static void Crystal_Tray()
+        {
+            Console.Write($"\nHow many trays do you want to make : ");
+            string traysS = Console.ReadLine();
+
+            bool success = int.TryParse(traysS, out int trays);
+            if (success && trays >= 1)
+            {
+                //Material List
+                int cloth = trays * 12;
+                int chemical = trays * 3;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth (Fertilizers) : {cloth} ({cloth / 4}) [{cloth * 5.5f}$]\n-Chemicals : {chemical} [{chemical * 127}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {trays * 1400}$\n-Production Costs : {cloth * 5.5f + chemical * 127}$\n=========================\n-Net Profits : {trays * 953}$");
+                Console.WriteLine($"\n-Crystal Bags Produced : {trays * 5}\n-Trays Produced : {trays}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Crystal_Tray();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                DrugMenu();
+            }
+            else
+            {
+                Crystal_Selector();
+            }
+        }
+
+        //Crystal Bags v2
+        static void Crystal_Bag()
+        {
+            Console.Write($"\nHow many bags do you want to make (minimum of 5) : ");
+            string bagsS = Console.ReadLine();
+
+            bool success = int.TryParse(bagsS, out int bags);
+            if (success && bags >= 5)
+            {
+                float traysF = bags / 5f;
+                int trays = (int)traysF;
+
+                //Material List
+                int cloth = trays * 12;
+                int chemical = trays * 3;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth (Fertilizers) : {cloth} ({cloth / 4}) [{cloth * 5.5f}$]\n-Chemicals : {chemical} [{chemical * 127}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {trays * 1400}$\n-Production Costs : {cloth * 5.5f + chemical * 127}$\n=========================\n-Net Profits : {trays * 953}$");
+                Console.WriteLine($"\n-Crystal Bags Produced : {trays * 5}\n-Trays Produced : {trays}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Crystal_Bag();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                DrugMenu();
+            }
+            else
+            {
+                Crystal_Selector();
+            }
+        }
+
+        //Crystal Profit v2
+        static void Crystal_Profit()
+        {
+            Console.Write($"\nHow much do you want to make (minimum of 953$) : ");
+            string profitS = Console.ReadLine();
+
+            bool success = int.TryParse(profitS, out int profit);
+            if (success && profit >= 953)
+            {
+                float traysF = profit / 953f;
+                int trays = (int)traysF;
+
+                //Material List
+                int cloth = trays * 12;
+                int chemical = trays * 3;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth (Fertilizers) : {cloth} ({cloth / 4}) [{cloth * 5.5f}$]\n-Chemicals : {chemical} [{chemical * 127}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {trays * 1400}$\n-Production Costs : {cloth * 5.5f + chemical * 127}$\n=========================\n-Net Profits : {trays * 953}$");
+                Console.WriteLine($"\n-Crystal Bags Produced : {trays * 5}\n-Trays Produced : {trays}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Crystal_Budget();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                DrugMenu();
+            }
+            else
+            {
+                Crystal_Selector();
+            }
+        }
+
+        //Snow Budget v2
+        static void Snow_Budget()
+        {
+            Console.Write($"\nEnter your budget (minimum of 44$) : ");
+            string budgetS = Console.ReadLine();
+
+            bool success = int.TryParse(budgetS, out int budget);
+            if (success && budget >= 44)
+            {
+                float batchesF = budget / 44f;
+                int batches = (int)batchesF;
+
+                //Material List
+                int cloth = batches * 8;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth (Fertilizers) : {cloth} ({cloth/4}) [{cloth * 5.5f}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {batches * 820}$\n-Production Costs : {cloth * 5.5f}$\n=========================\n-Net Profits : {batches * 776}$");
+                Console.WriteLine($"\n-Snow Bags Produced : {batches * 4}\n-Batches Produced : {batches}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Snow_Budget();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                DrugMenu();
+            }
+            else
+            {
+                Snow_Selector();
+            }
+        }
+
+        //Snow Batch v2
+        static void Snow_Batch()
+        {
+            Console.Write($"\nHow many batches do you want to make : ");
+            string batchesS = Console.ReadLine();
+
+            bool success = int.TryParse(batchesS, out int batches);
+            if (success && batches >= 1)
+            {
+                //Material List
+                int cloth = batches * 8;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth (Fertilizers) : {cloth} ({cloth / 4}) [{cloth * 5.5f}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {batches * 820}$\n-Production Costs : {cloth * 5.5f}$\n=========================\n-Net Profits : {batches * 776}$");
+                Console.WriteLine($"\n-Snow Bags Produced : {batches * 4}\n-Batches Produced : {batches}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Snow_Budget();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                DrugMenu();
+            }
+            else
+            {
+                Snow_Selector();
+            }
+        }
+
+        //Snow Profit v2
+        static void Snow_Profit()
+        {
+            Console.Write($"\nHow much do you want to make (minimum of 776$) : ");
+            string profitS = Console.ReadLine();
+
+            bool success = int.TryParse(profitS, out int profit);
+            if (success && profit >= 776)
+            {
+                float batchesF = profit / 776f;
+                int batches = (int)batchesF;
+
+                //Material List
+                int cloth = batches * 8;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth (Fertilizers) : {cloth} ({cloth / 4}) [{cloth * 5.5f}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {batches * 820}$\n-Production Costs : {cloth * 5.5f}$\n=========================\n-Net Profits : {batches * 776}$");
+                Console.WriteLine($"\n-Snow Bags Produced : {batches * 4}\n-Batches Produced : {batches}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Snow_Budget();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                DrugMenu();
+            }
+            else
+            {
+                Snow_Selector();
+            }
+        }
+
+        //Snow Bags v2
+        static void Snow_Bag()
+        {
+            Console.Write($"\nHow many bags do you want to make (minimum of 4) : ");
+            string bagsInputS = Console.ReadLine();
+
+            bool success = int.TryParse(bagsInputS, out int bagsInput);
+            if (success && bagsInput >= 4)
+            {
+                float batchesF = bagsInput / 4f;
+                int batches = (int)batchesF;
+
+                //Material List
+                int cloth = batches * 8;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth (Fertilizers) : {cloth} ({cloth / 4}) [{cloth * 5.5f}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {batches * 820}$\n-Production Costs : {cloth * 5.5f}$\n=========================\n-Net Profits : {batches * 776}$");
+                Console.WriteLine($"\n-Snow Bags Produced : {batches * 4}\n-Batches Produced : {batches}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Snow_Budget();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                DrugMenu();
+            }
+            else
+            {
+                Snow_Selector();
             }
         }
     }
 }
+
+// Weed : 125x - 44x
+// Crystal : 1400x - 447x
+// Snow : 820x - 44x
