@@ -7,14 +7,35 @@ namespace LifeRP_DrugCalc
 
         static void Main()
         {
-            Console.Title = "Life RP Drug Calculator - v2";
-            Console.WriteLine($"============================== LIFE RP Drug Calculator ==============================");
-            DrugMenu();
+            Console.Title = "Life RP Drug Calculator - v3";
+            Console.WriteLine($"============================== LIFE RP Calculator ==============================");
+            StartMenu();
+        }
+
+        static void StartMenu()
+        {
+            Console.Write($"\nChoose calculator type (Legal or Illegal) : ");
+            string calcType = Console.ReadLine();
+
+            switch (calcType.ToLower())
+            {
+                case "legal":
+                    LegalMenu();
+                    break;
+                case "illegal":
+                    DrugMenu();
+                    break;
+                default:
+                    Console.WriteLine("\n" + "Invalid Calculator Type, try again." + "\n");
+                    StartMenu();
+                    break;
+            }
+
         }
         static void DrugMenu()
         {
 
-            Console.Write($"\nWhat type of drugs are you making (Weed, Crystal or Snow) : ");
+            Console.Write($"\nWhat type of drugs are you making (Weed, Crystal, Snow or BChem) : ");
             string drugType = Console.ReadLine();
 
             switch (drugType.ToLower())
@@ -28,12 +49,31 @@ namespace LifeRP_DrugCalc
                 case "snow":
                     Snow_Selector();
                     break;
+                case "bchem":
+                    BChem_Selector();
+                    break;
                 default:
                     Console.WriteLine("\n" + "Invalid Drug Type, try again." + "\n");
                     DrugMenu();
                     break;
             }
 
+        }
+        static void LegalMenu()
+        {
+            Console.Write($"\nWhat are you producing (Tobacco) : ");
+            string legalType = Console.ReadLine();
+
+            switch (legalType.ToLower())
+            {
+                case "tobacco":
+                    Tobacco_Selector();
+                    break;
+                default:
+                    Console.WriteLine("\n" + "Invalid Product Type, try again." + "\n");
+                    LegalMenu();
+                    break;
+            }
         }
 
         // Weed Selector
@@ -114,6 +154,29 @@ namespace LifeRP_DrugCalc
             }
         }
 
+        static void BChem_Selector()
+        {
+            Console.Write("\n" + "Enter calculator type (Budget, Shipment, Refined) : ");
+            string weedType = Console.ReadLine();
+
+            switch (weedType.ToLower())
+            {
+                case "budget":
+                    BChem_Budget();
+                    break;
+                case "shipment":
+                    BChem_Shipment();
+                    break;
+                case "refined":
+                    BChem_Refined();
+                    break;
+                default:
+                    Console.WriteLine("\n" + "Invalid Calculator Type, try again");
+                    BChem_Selector();
+                    break;
+            }
+        }
+
         //Weed Budget v2
         static void Weed_Budget()
         {
@@ -145,12 +208,12 @@ namespace LifeRP_DrugCalc
 
             //End Menu
             Console.ReadKey();
-            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
             string endMenu = Console.ReadLine();
 
             if (endMenu.ToLower() == "back")
             {
-                DrugMenu();
+                StartMenu();
             }
             else
             {
@@ -186,7 +249,7 @@ namespace LifeRP_DrugCalc
 
             //End Menu
             Console.ReadKey();
-            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
             string endMenu = Console.ReadLine();
 
             if (endMenu.ToLower() == "back")
@@ -229,12 +292,12 @@ namespace LifeRP_DrugCalc
 
             //End Menu
             Console.ReadKey();
-            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
             string endMenu = Console.ReadLine();
 
             if (endMenu.ToLower() == "back")
             {
-                DrugMenu();
+                StartMenu();
             }
             else
             {
@@ -271,12 +334,12 @@ namespace LifeRP_DrugCalc
 
             //End Menu
             Console.ReadKey();
-            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
             string endMenu = Console.ReadLine();
 
             if (endMenu.ToLower() == "back")
             {
-                DrugMenu();
+                StartMenu();
             }
             else
             {
@@ -310,12 +373,12 @@ namespace LifeRP_DrugCalc
 
             //End Menu
             Console.ReadKey();
-            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
             string endMenu = Console.ReadLine();
 
             if (endMenu.ToLower() == "back")
             {
-                DrugMenu();
+                StartMenu();
             }
             else
             {
@@ -352,12 +415,12 @@ namespace LifeRP_DrugCalc
 
             //End Menu
             Console.ReadKey();
-            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
             string endMenu = Console.ReadLine();
 
             if (endMenu.ToLower() == "back")
             {
-                DrugMenu();
+                StartMenu();
             }
             else
             {
@@ -394,12 +457,12 @@ namespace LifeRP_DrugCalc
 
             //End Menu
             Console.ReadKey();
-            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
             string endMenu = Console.ReadLine();
 
             if (endMenu.ToLower() == "back")
             {
-                DrugMenu();
+                StartMenu();
             }
             else
             {
@@ -435,12 +498,12 @@ namespace LifeRP_DrugCalc
 
             //End Menu
             Console.ReadKey();
-            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
             string endMenu = Console.ReadLine();
 
             if (endMenu.ToLower() == "back")
             {
-                DrugMenu();
+                StartMenu();
             }
             else
             {
@@ -473,12 +536,12 @@ namespace LifeRP_DrugCalc
 
             //End Menu
             Console.ReadKey();
-            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
             string endMenu = Console.ReadLine();
 
             if (endMenu.ToLower() == "back")
             {
-                DrugMenu();
+                StartMenu();
             }
             else
             {
@@ -514,12 +577,12 @@ namespace LifeRP_DrugCalc
 
             //End Menu
             Console.ReadKey();
-            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
             string endMenu = Console.ReadLine();
 
             if (endMenu.ToLower() == "back")
             {
-                DrugMenu();
+                StartMenu();
             }
             else
             {
@@ -550,21 +613,342 @@ namespace LifeRP_DrugCalc
             else
             {
                 Console.WriteLine($"\nInvalid Characters, try again");
-                Snow_Budget();
+                Snow_Bag();
             }
 
             //End Menu
             Console.ReadKey();
-            Console.WriteLine($"\nType 'Back' to return to Drug Selection, or press any key to go back to Mode Selection");
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
             string endMenu = Console.ReadLine();
 
             if (endMenu.ToLower() == "back")
             {
-                DrugMenu();
+                StartMenu();
             }
             else
             {
                 Snow_Selector();
+            }
+        }
+
+        static void Tobacco_Selector()
+        {
+            Console.Write("\n" + "Enter calculator type (Budget, Plant, Cigar, Profit) : ");
+            string tobaccoType = Console.ReadLine();
+
+            switch (tobaccoType.ToLower())
+            {
+                case "budget":
+                    Tobacco_Budget();
+                    break;
+                case "plant":
+                    Tobacco_Batch();
+                    break;
+                case "profit":
+                    Tobacco_Profit();
+                    break;
+                case "cigar":
+                    Tobacco_Cigar();
+                    break;
+                default:
+                    Console.WriteLine("\n" + "Invalid Calculator Type, try again");
+                    Tobacco_Selector();
+                    break;
+            }
+        }
+
+        // Tobacco Budget
+        static void Tobacco_Budget()
+        {
+            Console.Write($"\nEnter your budget (minimum of 33$) : ");
+            string budgetS = Console.ReadLine();
+
+            bool success = int.TryParse(budgetS, out int budget);
+            if (success && budget >= 33)
+            {
+                float batchesF = budget / 33f;
+                int batches = (int)batchesF;
+
+                //Material List
+                int cloth = batches * 6;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth : {cloth} [{cloth * 5.5f}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {batches * 615}$\n-Production Costs : {cloth * 5.5f}$\n=========================\n-Net Profits : {batches * 582}$");
+                Console.WriteLine($"\n-Cigars Produced : {batches * 3}\n-Plants Produced : {batches}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Tobacco_Budget();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                StartMenu();
+            }
+            else
+            {
+                Tobacco_Selector();
+            }
+        }
+
+        // Tobacco Batch
+        static void Tobacco_Batch()
+        {
+            Console.Write($"\nHow many plants do you have produced : ");
+            string batchesS = Console.ReadLine();
+
+            bool success = int.TryParse(batchesS, out int batches);
+            if (success && batches >= 1)
+            {
+                //Material List
+                int cloth = batches * 6;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth : {cloth} [{cloth * 5.5f}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {batches * 615}$\n-Production Costs : {cloth * 5.5f}$\n=========================\n-Net Profits : {batches * 582}$");
+                Console.WriteLine($"\n-Cigars Produced : {batches * 3}\n-Plants Produced : {batches}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Tobacco_Budget();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                StartMenu();
+            }
+            else
+            {
+                Tobacco_Selector();
+            }
+        }
+
+        // Tobacco Profit
+        static void Tobacco_Profit()
+        {
+            Console.Write($"\nHow much do you want to make (minimum of 582$) : ");
+            string profitS = Console.ReadLine();
+
+            bool success = int.TryParse(profitS, out int profit);
+            if (success && profit >= 582)
+            {
+                float batchesF = profit / 582f;
+                int batches = (int)batchesF;
+
+                //Material List
+                int cloth = batches * 6;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth : {cloth} [{cloth * 5.5f}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {batches * 615}$\n-Production Costs : {cloth * 5.5f}$\n=========================\n-Net Profits : {batches * 582}$");
+                Console.WriteLine($"\n-Cigars Produced : {batches * 3}\n-Plants Produced : {batches}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Tobacco_Profit();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                StartMenu();
+            }
+            else
+            {
+                Tobacco_Selector();
+            }
+        }
+
+        // Tobacco Cigar
+        static void Tobacco_Cigar()
+        {
+            Console.Write($"\nHow many bags do you want to make (minimum of 3) : ");
+            string bagsInputS = Console.ReadLine();
+
+            bool success = int.TryParse(bagsInputS, out int bagsInput);
+            if (success && bagsInput >= 3)
+            {
+                float batchesF = bagsInput / 3f;
+                int batches = (int)batchesF;
+
+                //Material List
+                int cloth = batches * 6;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth : {cloth} [{cloth * 5.5f}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {batches * 615}$\n-Production Costs : {cloth * 5.5f}$\n=========================\n-Net Profits : {batches * 582}$");
+                Console.WriteLine($"\n-Cigars Produced : {batches * 3}\n-Plants Produced : {batches}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                Tobacco_Cigar();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                StartMenu();
+            }
+            else
+            {
+                Tobacco_Selector();
+            }
+        }
+
+        // BChem Budget
+        static void BChem_Budget()
+        {
+            Console.Write($"\nEnter your budget (minimum of 777$) : ");
+            string budgetS = Console.ReadLine();
+
+            bool success = int.TryParse(budgetS, out int budget);
+            if (success && budget >= 777)
+            {
+                float batchesF = budget / 777f;
+                int batches = (int)batchesF;
+
+                //Material List
+                int cloth = batches * 2;
+                int berries = batches * 2;
+                int chemicals = batches * 6;
+                int water = batches * 4;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth : {cloth} [{cloth * 5.5f}$]\n-Indigo Berries : {berries/2}\n-Amber Berries : {berries}\n-Mauve Berries : {berries}\n-Water : {water} [{water * 1}$]\n-Chemicals : {chemicals} [{chemicals * 127}$]");
+
+                //Misc Stats
+                float shipmentF = batches / 250f;
+                int shipment = (int)shipmentF;
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {batches * 4354.396f}$\n-Production Costs : {batches * 777}$\n=========================\n-Net Profits : {batches * 3577.396f}$");
+                Console.WriteLine($"\n-Refined Berry Chemicals Produced : {batches * 2}\n-Shipments Ready : {shipment}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                BChem_Budget();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                StartMenu();
+            }
+            else
+            {
+                BChem_Selector();
+            }
+        }
+
+        //BChem Shipment
+        static void BChem_Shipment()
+        {
+            Console.Write($"\nHow many shipments do you want to make : ");
+            string shipmentS = Console.ReadLine();
+
+            bool success = int.TryParse(shipmentS, out int shipment);
+            if (success && shipment >= 1)
+            {
+                //Material List
+                int batches = shipment * 250;
+                int cloth = batches * 2;
+                int berries = batches * 2;
+                int chemicals = batches * 6;
+                int water = batches * 4;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth : {cloth} [{cloth * 5.5f}$]\n-Indigo Berries : {berries / 2}\n-Amber Berries : {berries}\n-Mauve Berries : {berries}\n-Water : {water} [{water * 1}$]\n-Chemicals : {chemicals} [{chemicals * 127}$]");
+
+                //Misc Stats
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {batches * 4354.396f}$\n-Production Costs : {batches * 777}$\n=========================\n-Net Profits : {batches * 3577.396f}$");
+                Console.WriteLine($"\n-Refined Berry Chemicals Produced : {batches * 2}\n-Shipments Ready : {shipment}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                BChem_Shipment();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                StartMenu();
+            }
+            else
+            {
+                BChem_Selector();
+            }
+        }
+
+        // BChem Refined
+        static void BChem_Refined()
+        {
+            Console.Write($"\nHow many refined berry chemicals do you want to make (minimum of 2) : ");
+            string bagsInputS = Console.ReadLine();
+
+            bool success = int.TryParse(bagsInputS, out int bagsInput);
+            if (success && bagsInput >= 2)
+            {
+                float batchesF = bagsInput / 2f;
+                int batches = (int)batchesF;
+
+                //Material List
+                int cloth = batches * 2;
+                int berries = batches * 2;
+                int chemicals = batches * 6;
+                int water = batches * 4;
+                Console.WriteLine($"\n===========================================\nMATERIAL LIST : \n-Cloth : {cloth} [{cloth * 5.5f}$]\n-Indigo Berries : {berries / 2}\n-Amber Berries : {berries}\n-Mauve Berries : {berries}\n-Water : {water} [{water * 1}$]\n-Chemicals : {chemicals} [{chemicals * 127}$]");
+
+                //Misc Stats
+                float shipmentF = batches / 250f;
+                int shipment = (int)shipmentF;
+                Console.WriteLine($"\nMONEY STATISTICS :\n-Gross Profits : {batches * 4354.396f}$\n-Production Costs : {batches * 777}$\n=========================\n-Net Profits : {batches * 3577.396f}$");
+                Console.WriteLine($"\n-Refined Berry Chemicals Produced : {batches * 2}\n-Shipments Ready : {shipment}\n===========================================");
+            }
+            else
+            {
+                Console.WriteLine($"\nInvalid Characters, try again");
+                BChem_Refined();
+            }
+
+            //End Menu
+            Console.ReadKey();
+            Console.WriteLine($"\nType 'Back' to return to Calculator Selection, or press any key to go back to Mode Selection");
+            string endMenu = Console.ReadLine();
+
+            if (endMenu.ToLower() == "back")
+            {
+                StartMenu();
+            }
+            else
+            {
+                BChem_Selector();
             }
         }
     }
@@ -573,3 +957,6 @@ namespace LifeRP_DrugCalc
 // Weed : 125x - 44x
 // Crystal : 1400x - 447x
 // Snow : 820x - 44x
+// Berry Chems : 4354.396x - 777x
+
+// Tobacco : 615x - 33x
